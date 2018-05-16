@@ -21,10 +21,10 @@ Current build status
 
 Current release info
 ====================
-[![Conda Recipe](https://img.shields.io/badge/recipe-cftime-green.svg)](https://anaconda.org/conda-forge/cftime)
-[![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cftime.svg)](https://anaconda.org/conda-forge/cftime)
-[![Conda Version](https://img.shields.io/conda/vn/conda-forge/cftime.svg)](https://anaconda.org/conda-forge/cftime)
-[![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cftime.svg)](https://anaconda.org/conda-forge/cftime)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cftime-green.svg)](https://anaconda.org/conda-forge/cftime) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cftime.svg)](https://anaconda.org/conda-forge/cftime) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cftime.svg)](https://anaconda.org/conda-forge/cftime) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cftime.svg)](https://anaconda.org/conda-forge/cftime) |
 
 Installing cftime
 =================
