@@ -9,18 +9,20 @@ source:
   sha256: f62fe79ed2ad38f4211477e59f6f045c91278351f4ce7578e33ddf52fb121ea8
 
 build:
-  number: 0
-  script: python -m pip install --no-deps --ignore-installed .
+  number: 1
+  script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 requirements:
   build:
+    - {{ compiler('c') }}
+  host:
     - python
     - pip
     - cython
-    - numpy 1.11*
+    - numpy
   run:
     - python
-    - numpy >=1.11
+    - {{ pin_compatible('numpy') }}
 
 test:
   source_files:
