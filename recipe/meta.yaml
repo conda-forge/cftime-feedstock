@@ -1,4 +1,4 @@
-{% set version = "1.0.2.1" %}
+{% set version = "1.0.3" %}
 
 package:
   name: cftime
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/c/cftime/cftime-{{ version }}.tar.gz
-  sha256: 2c81d4879a2c1753961d647e55e0125039ddeda195944c3d526f2cf087dfb7bb
+  sha256: 9eeed34bf074f50318bc553044124824ba343d2066ae27444104c0c3618b0d2c
 
 build:
-  number: 1000
+  number: 0
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv"
 
 requirements:
@@ -49,3 +49,4 @@ extra:
   recipe-maintainers:
     - jhamman
     - ocefpaf
+    - bjlittle
