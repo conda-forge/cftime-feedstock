@@ -1,4 +1,4 @@
-{% set version = "1.1.1.1" %}
+{% set version = "1.1.1.2" %}
 
 package:
   name: cftime
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/c/cftime/cftime-{{ version }}.tar.gz
-  sha256: dbae801b8c20340c679eabb8b6d46d7db5c22e2e70b1b68e7ee9f3899d0cb6c8
+  sha256: 35711b5ec3928b9e724817bfa1b7325da205788ee04eae9166cbcd96ea7976a6
 
 build:
   number: 0
