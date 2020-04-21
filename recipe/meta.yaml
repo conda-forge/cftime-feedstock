@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -27,16 +27,18 @@ requirements:
 test:
   source_files:
     - test
+    - pip
   requires:
     - pytest
   imports:
     - cftime
   commands:
     - pytest -vv test
+    - pip check
 
 about:
   home: https://github.com/Unidata/cftime
-  license: MIT and GPL-3.0
+  license: MIT and GPL-3.0-only
   license_file: COPYING
   summary: Time-handling functionality from netcdf4-python
 
