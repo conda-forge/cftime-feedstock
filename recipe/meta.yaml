@@ -1,4 +1,4 @@
-{% set version = "1.1.1.1" %}
+{% set version = "1.2.0" %}
 
 package:
   name: cftime
@@ -6,11 +6,11 @@ package:
 
 source:
   url: https://pypi.io/packages/source/c/cftime/cftime-{{ version }}.tar.gz
-  sha256: dbae801b8c20340c679eabb8b6d46d7db5c22e2e70b1b68e7ee9f3899d0cb6c8
+  sha256: ff0a175edda260357ff7d24a32bbe0a8c72eafd5f6a404ce487127f9d01836db
 
 build:
   number: 1
-  script: {{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
@@ -29,14 +29,16 @@ test:
     - test
   requires:
     - pytest
+    - pip
   imports:
     - cftime
   commands:
     - pytest -vv test
+    - pip check
 
 about:
   home: https://github.com/Unidata/cftime
-  license: MIT and GPL-3.0
+  license: MIT and GPL-3.0-only
   license_file: COPYING
   summary: Time-handling functionality from netcdf4-python
 
