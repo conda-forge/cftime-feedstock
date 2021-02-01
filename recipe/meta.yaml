@@ -38,8 +38,8 @@ test:
 
 about:
   home: https://github.com/Unidata/cftime
-  license: MIT and GPL-3.0-only
-  license_file: COPYING
+  license: MIT
+  license_file: LICENSE
   summary: Time-handling functionality from netcdf4-python
 
   description: |
