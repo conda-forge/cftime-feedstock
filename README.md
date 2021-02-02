@@ -3,7 +3,7 @@ About cftime
 
 Home: https://github.com/Unidata/cftime
 
-Package license: MIT and GPL-3.0-only
+Package license: MIT
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cftime-feedstock/blob/master/LICENSE.txt)
 
