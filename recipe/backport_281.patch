@@ -1,0 +1,11 @@
+--- cftime-1.6.0.orig/src/cftime/_cftime.pyx	2022-03-03 10:59:04.000000000 -0300
++++ cftime-1.6.0/src/cftime/_cftime.pyx	2022-06-29 11:02:24.019499430 -0300
+@@ -379,7 +379,7 @@
+     if num.dtype.kind in "iu":
+         return num
+     else:
+-        if np.any(num < _MIN_INT64) or np.any(num > _MAX_INT64):
++        if np.any(np.less(num,_MIN_INT64,casting='same_kind')) or np.any(np.greater(num,_MAX_INT64,casting='same_kind')):
+             raise OverflowError('time values outside range of 64 bit signed integers')
+         if isinstance(num, np.ma.core.MaskedArray):
+             int_num = np.ma.masked_array(np.rint(num), dtype=np.int64)
