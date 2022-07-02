@@ -7,9 +7,6 @@ package:
 source:
   url: https://pypi.io/packages/source/c/cftime/cftime-{{ version }}.tar.gz
   sha256: 511215f45ed7cc79ead84020e88e1fc476b8aba71b47d2fcdef8e65242406927
-  patches:
-    # remove this patch in the next release
-    - backport_281.patch
 
 build:
   number: 0
