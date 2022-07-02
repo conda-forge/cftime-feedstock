@@ -1,4 +1,4 @@
-{% set version = "1.6.0" %}
+{% set version = "1.6.1" %}
 
 package:
   name: cftime
@@ -6,13 +6,10 @@ package:
 
 source:
   url: https://pypi.io/packages/source/c/cftime/cftime-{{ version }}.tar.gz
-  sha256: 13103e6650beea6552316bd5825d6aa3b7e98f5b8115026df4826798dff9f741
-  patches:
-    # remove this patch in the next release
-    - backport_281.patch
+  sha256: 511215f45ed7cc79ead84020e88e1fc476b8aba71b47d2fcdef8e65242406927
 
 build:
-  number: 2
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
