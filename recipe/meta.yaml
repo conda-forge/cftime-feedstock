@@ -5,11 +5,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/c/cftime/cftime-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/c/cftime/cftime-{{ version }}.tar.gz
   sha256: 8225fed6b9b43fb87683ebab52130450fc1730011150d3092096a90e54d1e81e
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
