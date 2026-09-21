@@ -2,7 +2,6 @@ schema_version: 1
 
 context:
   version: "1.6.6"
-  python_min: "3.11"
 
 package:
   name: cftime
@@ -62,7 +61,6 @@ tests:
       - pytest -vv test
       - if: unix
         then:
-          - export SP_DIR=$(python -c "import site; print(site.getsitepackages()[0])")
           - abi3audit $SP_DIR/cftime/_cftime.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
       - if: win
         then:
