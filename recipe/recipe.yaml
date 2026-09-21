@@ -16,9 +16,9 @@ build:
   number: 0
   script:
     - if: win
-      then: set "CFTIME_LIMITED_API=1"
+      then: "set CFTIME_LIMITED_API=1"
       else: export CFTIME_LIMITED_API="1"
-    - CFTIME_LIMITED_API="1" ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
     version_independent: true
 
@@ -67,7 +67,7 @@ tests:
       - if: win
         then:
           - set "SP_DIR=%PREFIX%\\Lib\\site-packages"
-          - abi3audit %SP_DIR%\\gsw\\_cftime.abi3.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
+          - abi3audit %SP_DIR%\\cftime\\_cftime.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
   
 about:
   summary: Time-handling functionality from netcdf4-python
