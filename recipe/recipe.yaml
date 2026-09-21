@@ -1,0 +1,84 @@
+schema_version: 1
+
+context:
+  version: "1.6.6"
+
+package:
+  name: cftime
+  version: ${{ version }}
+
+source:
+  url: https://github.com/Unidata/cftime/archive/refs/tags/v${{ version }}rel.tar.gz
+  sha256: f59d709250d87c5e8c773bd6d70927a47bbe96aa056668d4546093378b6e5ee0
+
+build:
+  number: 0
+  script:
+    - if: win
+      then: "set CFTIME_LIMITED_API=1"
+      else: export CFTIME_LIMITED_API="1"
+    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    version_independent: true
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then:
+        - python ${{ python_min }}.*
+        - cross-python_${{ target_platform }}
+        - numpy >=2.0.0,<3
+        - cython >=0.29.20
+    - ${{ compiler("c") }}
+    - ${{ stdlib("c") }}
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - python-abi3
+    - numpy >=2.0.0,<3
+    - setuptools >=77.0.1
+    - cython >=0.29.20
+  run:
+    - python ${{ python_min }}.*
+    - numpy >=2.0.0,<3
+
+tests:
+  - python:
+      imports: cftime
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+  - files:
+      source:
+        - test/
+    requirements:
+      run:
+        - pip
+        - abi3audit
+        - pytest
+    script:
+      - pytest -vv test
+      - if: unix
+        then:
+          - abi3audit $SP_DIR/cftime/_cftime.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
+      - if: win
+        then:
+          - set "SP_DIR=%PREFIX%\\Lib\\site-packages"
+          - abi3audit %SP_DIR%\\cftime\\_cftime.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
+  
+about:
+  summary: Time-handling functionality from netcdf4-python
+  homepage: https://github.com/Unidata/cftime
+  license: MIT
+  license_file: LICENSE
+
+  description: |
+    Time-handling functionality from netcdf4-python
+  documentation: https://github.com/Unidata/cftime
+  repository: https://github.com/Unidata/cftime
+
+extra:
+  recipe-maintainers:
+    - jhamman
+    - ocefpaf
