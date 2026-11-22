@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://github.com/Unidata/cftime/archive/refs/tags/v${{ version }}rel.tar.gz
-  sha256: f59d709250d87c5e8c773bd6d70927a47bbe96aa056668d4546093378b6e5ee0
+  sha256: db03b83d55589cad78a767238c381d73270449becfb8765b562ed14e1196f6c3
 
 build:
   number: 1
