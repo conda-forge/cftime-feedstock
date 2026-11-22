@@ -12,7 +12,7 @@ source:
   sha256: f59d709250d87c5e8c773bd6d70927a47bbe96aa056668d4546093378b6e5ee0
 
 build:
-  number: 0
+  number: 1
   script:
     - if: win
       then: "set CFTIME_LIMITED_API=1"
