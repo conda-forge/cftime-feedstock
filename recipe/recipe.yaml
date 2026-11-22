@@ -13,33 +13,42 @@ source:
 
 build:
   number: 1
-  script:
-    - if: win
-      then: "set CFTIME_LIMITED_API=1"
-      else: export CFTIME_LIMITED_API="1"
-    - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  skip:
+    # one abi3 build (at python_min) plus one build per free-threading python
+    - is_abi3 and not is_python_min
+  variant:
+    use_keys:
+      - python
   python:
-    version_independent: true
+    version_independent: ${{ is_abi3 }}
+  script:
+    env:
+      CFTIME_LIMITED_API: ${{ "1" if is_abi3 else "0" }}
+    content:
+      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   build:
     - if: build_platform != target_platform
       then:
-        - python ${{ python_min }}.*
+        - python
         - cross-python_${{ target_platform }}
         - numpy >=2.0.0,<3
         - cython >=0.29.20
     - ${{ compiler("c") }}
     - ${{ stdlib("c") }}
   host:
-    - python ${{ python_min }}.*
+    - python
     - pip
-    - python-abi3
     - numpy >=2.0.0,<3
     - setuptools >=77.0.1
     - cython >=0.29.20
+    - if: is_abi3
+      then:
+        - python-abi3
+        - python ${{ python_min }}.*
   run:
-    - python ${{ python_min }}.*
+    - python
     - numpy >=2.0.0,<3
 
 tests:
@@ -47,26 +56,34 @@ tests:
       imports: cftime
       pip_check: true
       python_version:
-        - ${{ python_min }}.*
         - "*"
+        - if: is_abi3
+          then:
+            - ${{ python_min }}.*
   - files:
       source:
         - test/
     requirements:
       run:
         - pip
-        - abi3audit
         - pytest
     script:
       - pytest -vv test
-      - if: unix
-        then:
-          - abi3audit $SP_DIR/cftime/_cftime.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
-      - if: win
-        then:
-          - set "SP_DIR=%PREFIX%\\Lib\\site-packages"
-          - abi3audit %SP_DIR%\\cftime\\_cftime.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
-  
+  - if: is_abi3
+    then:
+      - requirements:
+          run:
+            - abi3audit
+            - python ${{ python_min }}.*
+        script:
+          - if: unix
+            then:
+              - abi3audit $SP_DIR/cftime/_cftime.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
+          - if: win
+            then:
+              - set "SP_DIR=%PREFIX%\\Lib\\site-packages"
+              - abi3audit %SP_DIR%\\cftime\\_cftime.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
+
 about:
   summary: Time-handling functionality from netcdf4-python
   homepage: https://github.com/Unidata/cftime
