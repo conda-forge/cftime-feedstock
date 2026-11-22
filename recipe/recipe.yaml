@@ -81,7 +81,6 @@ tests:
               - abi3audit $SP_DIR/cftime/_cftime.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
           - if: win
             then:
-              - set "SP_DIR=%PREFIX%\\Lib\\site-packages"
               - abi3audit %SP_DIR%\\cftime\\_cftime.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
 
 about:
