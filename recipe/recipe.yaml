@@ -12,7 +12,7 @@ source:
   sha256: db03b83d55589cad78a767238c381d73270449becfb8765b562ed14e1196f6c3
 
 build:
-  number: 1
+  number: 2
   skip:
     # one abi3 build (at python_min) plus one build per free-threading python
     - is_abi3 and not is_python_min
